@@ -1,6 +1,5 @@
 package dao;
 
-import service.Param;
 import service.Schema;
 import service.Sheet;
 
@@ -12,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static service.Param.*;
-import static utils.Utils.pool;
+import static utils.Utils.executeQuery;
+import static utils.Utils.executeUpdateQuery;
+
 
 public class SheetDao implements Dao<Sheet> {
     String sql;
@@ -98,17 +99,5 @@ public class SheetDao implements Dao<Sheet> {
         }
     }
 
-    private int executeUpdateQuery(String sql) throws SQLException {
-        Connection con = pool.getConnection();
-        Statement statement = con.createStatement();
-        return statement.executeUpdate(sql);
 
-    }
-
-    private ResultSet executeQuery(String sql) throws SQLException {
-        Connection con = pool.getConnection();
-        Statement statement = con.createStatement();
-        return statement.executeQuery(sql);
-
-    }
 }

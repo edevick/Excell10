@@ -3,6 +3,10 @@ package utils;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 public class Utils {
@@ -30,6 +34,19 @@ public class Utils {
             }
         }
         return properties;
+
+    }
+    public static int executeUpdateQuery(String sql) throws SQLException {
+        Connection con = pool.getConnection();
+        Statement statement = con.createStatement();
+        return statement.executeUpdate(sql);
+
+    }
+
+    public static ResultSet executeQuery(String sql) throws SQLException {
+        Connection con = pool.getConnection();
+        Statement statement = con.createStatement();
+        return statement.executeQuery(sql);
 
     }
 }

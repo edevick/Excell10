@@ -1,3 +1,5 @@
+import service.Cell;
+import service.Location;
 import service.Schema;
 import service.Sheet;
 
@@ -22,6 +24,10 @@ public class Demo {
         }
 
         schema.showTables();
+        Location location = new Location(1,1);
+        Cell cell1 = new Cell(sheet,location);
+        cell1.setValue("Kate");
+        cell1.updateCell("+Masha",1);
 
     }
 }
