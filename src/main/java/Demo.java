@@ -10,8 +10,10 @@ public class Demo {
         schema.createSchema("Excell");
         Sheet sheet = new Sheet("Sheet");
         sheet.createSheet();
-        sheet.addColumn(0);
-        sheet.deleteColumn(1,2);
+      //  sheet.addColumn(2);
+      //  sheet.deleteColumn(1,1);
+      //  sheet.addRow(2);
+      //  sheet.deleteRow(1,2);
         List<Sheet> tables = new ArrayList();
         int quantitySheets = 5;
         for (int i= 0; i< quantitySheets;i++) {

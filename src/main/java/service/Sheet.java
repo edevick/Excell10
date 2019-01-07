@@ -69,10 +69,17 @@ public class Sheet {
         }
     }
 
-    public void addRow() {
-        String[] params = new String[1];
+    public void addRow(int quantity) {
+        if (quantity < 1) {
+            System.out.println("WARNING: Quantity should be bigger than 1!");
+            return;
+        }
+        String[] params = new String[2];
         params[0] = ADD_ROW.toString();
-        sheetDao.update(this, params);
+        for (int i = 0; i < quantity; i++) {
+            params[1] = Integer.toString(i);
+            sheetDao.update(this, params);
+        }
     }
 
     public void deleteColumn(int indexFrom, int indexTo) {
@@ -81,7 +88,7 @@ public class Sheet {
             indexTo = indexFrom;
             indexFrom = temp;
         }
-        
+
         if ((indexFrom <1)|| (indexTo <1)){
             System.out.println("WARNING: Indexes should be bigger than 0!");
             return;
@@ -94,10 +101,22 @@ public class Sheet {
         }
     }
 
-    public void deleteRow(int index) {
+    public void deleteRow(int indexFrom, int indexTo) {
+        if ((indexFrom <1)|| (indexTo <1)){
+            System.out.println("WARNING: Indexes should be bigger than 0!");
+            return;
+        }
+
+        if (indexFrom>indexTo){
+            int temp = indexTo;
+            indexTo = indexFrom;
+            indexFrom = temp;
+        }
         String[] params = new String[2];
         params[0] = DELETE_ROW.toString();
-        params[1] = Integer.toString(index);
-        sheetDao.update(this, params);
+        for (int i = indexFrom; i <= indexTo; i++) {
+            params[1] = Integer.toString(i);
+            sheetDao.update(this, params);
+        }
     }
 }

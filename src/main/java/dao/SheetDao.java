@@ -30,13 +30,13 @@ public class SheetDao implements Dao<Sheet> {
 
     }
 
-    public List<String> getColumns(Sheet sheet){
+    public List<String> getColumns(Sheet sheet) {
         List<String> columnNames = new ArrayList();
-      sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA =\""+ Schema.getInstance().getNameSchema() +"\" and table_name = \""+sheet.getSheetName()+"\" ;";
+        sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA =\"" + Schema.getInstance().getNameSchema() + "\" and table_name = \"" + sheet.getSheetName() + "\" ;";
         try {
             ResultSet rs = executeQuery(sql);
             while (rs.next()) {
-               columnNames.add(rs.getString(1));
+                columnNames.add(rs.getString(1));
             }
 
         } catch (SQLException e) {
@@ -47,23 +47,25 @@ public class SheetDao implements Dao<Sheet> {
 
 
     public void update(Sheet sheet, String[] params) {
-        String message="";
+        String message = "";
         if (params[0].equals(ADD_ROW.toString())) {
-
+            sql = "INSERT INTO `" + Schema.getInstance().getNameSchema() + "`.`" + sheet.getSheetName() + "` () values();";
+            message = "Added row " + params[1] + ". Table " + sheet.getSheetName() + " is updated";
         }
 
         if (params[0].equals(ADD_COLUMN.toString())) {
-           sql = "ALTER TABLE `" + Schema.getInstance().getNameSchema() + "`.`" + sheet.getSheetName() + "` ADD " + params[1] + " VARCHAR(128);";
-           message = "Added column " + params[1]+ ". Table " + sheet.getSheetName()+ " is updated";
+            sql = "ALTER TABLE `" + Schema.getInstance().getNameSchema() + "`.`" + sheet.getSheetName() + "` ADD " + params[1] + " VARCHAR(128);";
+            message = "Added column " + params[1] + ". Table " + sheet.getSheetName() + " is updated";
         }
 
         if (params[0].equals(DELETE_ROW.toString())) {
-
+            sql = "DELETE FROM `" + Schema.getInstance().getNameSchema() + "`.`" + sheet.getSheetName() + "` WHERE id ="+ params[1];
+            message = "Deleted row " + params[1] + ". Table " + sheet.getSheetName() + " is updated";
         }
 
         if (params[0].equals(DELETE_COLUMN.toString())) {
-          sql = "ALTER TABLE `" + Schema.getInstance().getNameSchema() + "`.`" + sheet.getSheetName() + "`  DROP COLUMN " + params[1];
-          message = "Deleted column " + params[1]+ ". Table " + sheet.getSheetName()+ " is updated";
+            sql = "ALTER TABLE `" + Schema.getInstance().getNameSchema() + "`.`" + sheet.getSheetName() + "`  DROP COLUMN " + params[1];
+            message = "Deleted column " + params[1] + ". Table " + sheet.getSheetName() + " is updated";
         }
 
         try {
@@ -103,10 +105,10 @@ public class SheetDao implements Dao<Sheet> {
 
     }
 
-    private ResultSet executeQuery(String sql) throws SQLException{
+    private ResultSet executeQuery(String sql) throws SQLException {
         Connection con = pool.getConnection();
         Statement statement = con.createStatement();
-        return  statement.executeQuery(sql);
+        return statement.executeQuery(sql);
 
     }
 }
