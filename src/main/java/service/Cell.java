@@ -6,7 +6,7 @@ public class Cell {
     Location location;
     String value;
     Sheet sheet;
-    CellDao cellDao;
+    CellDao cellDao = new CellDao();
     String[]params = new String[1];
 
     public Cell(Sheet sheet,Location location) {
@@ -14,8 +14,19 @@ public class Cell {
         this.sheet = sheet;
         this.value = "";
     }
+    public Cell (Sheet sheet,String value){
+        this.location = getDefaultLocation();
+        this.sheet = sheet;
+        this.value = value;
+        cellDao.create(this);
+    }
 
+    private Location getDefaultLocation(){
+        int rowId = cellDao.getRows(this);
+        return new  Location(rowId,1);
+    }
     public Location getLocation() {
+
         return location;
     }
 
@@ -45,11 +56,14 @@ public class Cell {
         if (attribute == 0 ){
             params[0] = value;
         }else {
-            params[0] = this.getValue()+value;
+            params[0] = getOldValue()+value;
         }
         cellDao.update(this,params);
     }
 
+    private String getOldValue(){
+        return  cellDao.getOldValue(this);
+    }
     public Sheet getSheet() {
         return sheet;
     }

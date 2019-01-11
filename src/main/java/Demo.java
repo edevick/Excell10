@@ -24,10 +24,11 @@ public class Demo {
         }
 
         schema.showTables();
-        Location location = new Location(1,1);
+        Location location = new Location(4,2);
         Cell cell1 = new Cell(sheet,location);
-        cell1.setValue("Kate");
+       // cell1.setValue("Kate");
         cell1.updateCell("+Masha",1);
+       // Cell cell2 = new Cell(sheet,"qwerty");
 
     }
 }
