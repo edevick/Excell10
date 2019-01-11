@@ -28,7 +28,7 @@ public class Demo {
         Cell cell1 = new Cell(sheet,location);
        // cell1.setValue("Kate");
         cell1.updateCell("+Masha",1);
-       // Cell cell2 = new Cell(sheet,"qwerty");
+       Cell cell2 = new Cell(sheet,"qwerty");
 
     }
 }

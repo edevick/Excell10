@@ -5,7 +5,9 @@ import service.Schema;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.List;
+import java.util.logging.SocketHandler;
 
 import static utils.Utils.executeQuery;
 import static utils.Utils.executeUpdateQuery;
@@ -29,6 +31,7 @@ public class CellDao implements Dao<Cell> {
         sql = "UPDATE `" + Schema.getInstance().getNameSchema() + "`.`" + cell.getSheet().getSheetName() + "` SET column"+cell.getLocation().getColumnIndex()+"  = \""+params[0] +"\" where id = "+cell.getLocation().getRowIndex()+";";
         try {
             executeUpdateQuery(sql);
+            System.out.println("Row("+cell.getLocation().getRowIndex() +") is updated in table"   + cell.getSheet().getSheetName());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,6 +46,7 @@ public class CellDao implements Dao<Cell> {
       sql = "Insert INTO `" + Schema.getInstance().getNameSchema() + "`.`" + cell.getSheet().getSheetName() + "` (`column"+cell.getLocation().getColumnIndex()+"`) values(\""+cell.getValue()+"\");";
         try {
             executeUpdateQuery(sql);
+            System.out.println("Row("+cell.getLocation().getRowIndex() +") added in table"   + cell.getSheet().getSheetName());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,7 +54,7 @@ public class CellDao implements Dao<Cell> {
 
     public String getOldValue(Cell cell){
         String value="";
-        sql = "Select column"+cell.getLocation().getColumnIndex()+"  from `" + Schema.getInstance().getNameSchema() + "`.`" +cell.getSheet().getSheetName() + "  where id = "+cell.getLocation().getRowIndex()+"` ;";
+        sql = "Select column"+cell.getLocation().getColumnIndex()+"  from `" + Schema.getInstance().getNameSchema() + "`.`" +cell.getSheet().getSheetName() + "`  where id = "+cell.getLocation().getRowIndex()+" ;";
         try {
             ResultSet rs = executeQuery(sql);
             while (rs.next()) {
