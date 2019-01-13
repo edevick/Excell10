@@ -15,9 +15,9 @@ public class Cell {
         this.value = "";
     }
     public Cell (Sheet sheet,String value){
-        this.location = getDefaultLocation();
         this.sheet = sheet;
         this.value = value;
+        this.location = getDefaultLocation();
         cellDao.create(this);
     }
 

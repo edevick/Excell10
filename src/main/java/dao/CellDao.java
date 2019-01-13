@@ -69,6 +69,8 @@ public class CellDao implements Dao<Cell> {
 
     public int  getRows(Cell cell){
         int count = 0;
+        String n = Schema.getInstance().getNameSchema();
+        String k = cell.getSheet().getSheetName();
         sql = "Select COUNT(*) from `" + Schema.getInstance().getNameSchema() + "`.`" +cell.getSheet().getSheetName() + "` ;";
         try {
             ResultSet rs = executeQuery(sql);

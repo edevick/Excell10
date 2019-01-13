@@ -115,4 +115,35 @@ public final class Schema {
 
     }
 
+    public void showData(Sheet sheet,int quantity){
+        List<Sheet> datas = new ArrayList<>();
+        String sql = " select *  FROM `" + Schema.getInstance().getNameSchema() + "`.`" + sheet.getSheetName() + "`;";
+        Connection con = null;
+        try {
+            con = pool.getConnection();
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            System.out.println("Datas:");
+            String message ="";
+            int i = 0;
+            while (rs.next()) {
+              do{
+                    if (i == quantity) {
+                        message = message+'\n';
+                        i=0;
+                        break;
+                    }
+
+                    i++;
+                    message = message + rs.getString(i) + " ";
+
+                }while (i!=quantity);
+
+            }
+            System.out.println(message);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
