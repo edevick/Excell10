@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DBPool {
     private String url, user, password;
 
-    public DBPool(String url, String user, String password)  {
+    public DBPool(String url, String user, String password) {
         this.url = url;
         this.user = user;
         this.password = password;

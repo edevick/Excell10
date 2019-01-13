@@ -16,7 +16,7 @@ public class Demo {
 
         // sheet.deleteColumn(1, 1);
 
-         sheet.addRow(5);
+        sheet.addRow(5);
 
         //  sheet.deleteRow(1, 2);
 
@@ -29,7 +29,7 @@ public class Demo {
 
         schema.showTables();
 
-       // sheet.dropSheet();
+        // sheet.dropSheet();
 
         Location location = new Location(4, 2);
         Cell cell1 = new Cell(sheet, location);

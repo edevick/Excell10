@@ -36,6 +36,7 @@ public class Utils {
         return properties;
 
     }
+
     public static int executeUpdateQuery(String sql) throws SQLException {
         Connection con = pool.getConnection();
         Statement statement = con.createStatement();

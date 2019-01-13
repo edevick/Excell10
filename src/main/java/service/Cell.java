@@ -7,24 +7,26 @@ public class Cell {
     String value;
     Sheet sheet;
     CellDao cellDao = new CellDao();
-    String[]params = new String[1];
+    String[] params = new String[1];
 
-    public Cell(Sheet sheet,Location location) {
+    public Cell(Sheet sheet, Location location) {
         this.location = location;
         this.sheet = sheet;
         this.value = "";
     }
-    public Cell (Sheet sheet,String value){
+
+    public Cell(Sheet sheet, String value) {
         this.sheet = sheet;
         this.value = value;
         this.location = getDefaultLocation();
         cellDao.create(this);
     }
 
-    private Location getDefaultLocation(){
+    private Location getDefaultLocation() {
         int rowId = cellDao.getRows(this);
-        return new  Location(rowId,1);
+        return new Location(rowId, 1);
     }
+
     public Location getLocation() {
 
         return location;
@@ -45,25 +47,24 @@ public class Cell {
     }
 
     /**
-     *
      * @param value
-     * @param attribute
-     * 0- to replace existing value
-     * 1- to add to existing value
+     * @param attribute 0- to replace existing value
+     *                  1- to add to existing value
      */
-    public void updateCell(String value,int attribute){
+    public void updateCell(String value, int attribute) {
 
-        if (attribute == 0 ){
+        if (attribute == 0) {
             params[0] = value;
-        }else {
-            params[0] = getOldValue()+value;
+        } else {
+            params[0] = getOldValue() + value;
         }
-        cellDao.update(this,params);
+        cellDao.update(this, params);
     }
 
-    private String getOldValue(){
-        return  cellDao.getOldValue(this);
+    private String getOldValue() {
+        return cellDao.getOldValue(this);
     }
+
     public Sheet getSheet() {
         return sheet;
     }

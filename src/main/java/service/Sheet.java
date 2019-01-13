@@ -83,13 +83,13 @@ public class Sheet {
     }
 
     public void deleteColumn(int indexFrom, int indexTo) {
-        if (indexFrom>indexTo){
+        if (indexFrom > indexTo) {
             int temp = indexTo;
             indexTo = indexFrom;
             indexFrom = temp;
         }
 
-        if ((indexFrom <1)|| (indexTo <1)){
+        if ((indexFrom < 1) || (indexTo < 1)) {
             System.out.println("WARNING: Indexes should be bigger than 0!");
             return;
         }
@@ -102,12 +102,12 @@ public class Sheet {
     }
 
     public void deleteRow(int indexFrom, int indexTo) {
-        if ((indexFrom <1)|| (indexTo <1)){
+        if ((indexFrom < 1) || (indexTo < 1)) {
             System.out.println("WARNING: Indexes should be bigger than 0!");
             return;
         }
 
-        if (indexFrom>indexTo){
+        if (indexFrom > indexTo) {
             int temp = indexTo;
             indexTo = indexFrom;
             indexFrom = temp;
